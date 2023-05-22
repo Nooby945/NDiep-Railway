@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" type="image/x-icon" href="/favicon-32x32.ico" sizes="32x32" />
+    <link rel="icon" type="image/x-icon" href="/favicon-64x64.ico" sizes="64x64" />
+    <!-- <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" /> -->
+    <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" /> -->
+    <title>Z3D</title>
+    
+    <meta name="description" content="Reimplementation of the famous tank game - Survive and shoot at others while trying to keep your own tank alive!">
+    <meta data-n-head="ssr" data-hid="description" name="description" content="Reimplementation of the famous tank game - Survive and shoot at others while trying to keep your own tank alive!">
+    
+    <style>
+      body {
+        background-color: #000000;
+      }
+
+      html,
+      body,
+      #canvas {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      #loading {
+        color: #FFFFFF;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 48pt;
+        font-family: sans-serif;
+        font-weight: bold;
+        cursor: default;
+      }
+
+      #canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        cursor: default;
+      }
+
+      #textInputContainer {
+        display: none;
+        position: absolute;
+      }
+
+      #textInput {
+        background-color: transparent;
+        font-family: "Ubuntu";
+        padding: 0;
+        border: 0;
+        outline: none;
+      }
+
+      #a {
+        position: absolute;
+        bottom: 0px;
+        left: 50%;
+        pointer-events: none;
+      }
+
+      .aa {
+        background-color: transparent;
+
+        margin: 24px auto;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .aa-tall {
+        width: 300px;
+        height: 250px;
+      }
+
+      .aa-wide {
+        width: 728px;
+        height: 90px;
+      }
+    </style>
+  </head>
+  <body>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:700" rel="stylesheet" type="text/css" />
+    <span id="loading">Loading...</span>
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <div id="empty-container"></div>
+    <div style="position: absolute; width: 640px; height: 360px; top: 50%; left: 50%; margin-left: -320px; margin-top: -180px; display: none;">
+      <div id="player" style="width: 100%; height: 100%;"></div>
+    </div>
+    <div style="font-family:'Ubuntu'">&nbsp;</div>
+    <div id="textInputContainer"><input id="textInput" /></div>
+
+    <script src="/c.js"></script>
+    <script src="/build_6f59094d60f98fafc14371671d3ff31ef4d75d9e.wasm.js"></script>
+  </body>
+</html>
