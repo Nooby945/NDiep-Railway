@@ -6,8 +6,8 @@ import SmallDefender from "../Entity/Boss/SmallDefender"
 import FallenBooster from "../Entity/Boss/FallenBooster";
 import FallenOverlord from "../Entity/Boss/FallenOverlord";
 import Guardian from "../Entity/Boss/Guardian";
-import FatGuardian from "../Entity/Boss/FatGuardian"
-import FallenTrapper from "../Entity/Misc/Boss/FallenTrapper"
+import FatGuardian from "../Entity/Boss/FatGuardian";
+import FallenTrapper from "../Entity/Misc/Boss/FallenTrapper";
 import Summoner from "../Entity/Boss/Summoner";
 import LivingEntity from "../Entity/Live"
 import Mothership from "../Entity/Misc/Mothership"
@@ -23,16 +23,21 @@ import Heptagon from "../Entity/Shape/Heptagon"
 import WepSquare from "../Entity/Shape/WepSquare"
 import WepTriangle from "../Entity/Shape/WepTriangle"
 import Octagon from "../Entity/Shape/Octagon"
+import MazeWall from "../Entity/Misc/MazeWall";
+import Dodecagon from "../Entity/Shape/Dodecagon"
 import Hexagon from "../Entity/Shape/Hexagon"
 import ColossalHexagon from "../Entity/Shape/ColossalHexagon"
 import Square from "../Entity/Shape/Square";
+import Circle from "../Entity/Shape/Circle";
+import AdminCircle from "../Entity/Shape/AdminCircle";
+import AdminSquare from "../Entity/Shape/AdminSquare";
 import Triangle from "../Entity/Shape/Triangle";
 import AutoTurret from "../Entity/Tank/AutoTurret";
 import Bullet from "../Entity/Tank/Projectile/Bullet";
 import TankBody from "../Entity/Tank/TankBody";
 import { Entity, EntityStateFlags } from "../Native/Entity";
 import { saveToVLog } from "../util";
-import { Stat, StatCount, StyleFlags, Tank } from "./Enums";
+import { Stat, StatCount, StyleFlags, Tank, ClientBound } from "./Enums";
 import { getTankByName } from "./TankDefinitions"
 
 const RELATIVE_POS_REGEX = new RegExp(/~(-?\d+)?/);
@@ -51,7 +56,8 @@ export const enum CommandID {
     adminKillAll = "killall",
     adminKillEntity = "kill",
     adminCloseArena = "close",
-    testCommand = "test"
+    testCommand = "test",
+    broadcastMessage = "broadcast"
 }
 
 export interface CommandDefinition {
@@ -156,9 +162,16 @@ export const commandDefinitions = {
         permissionLevel: AccessLevel.FullAccess,
         isCheat: false
     },
-     test: {
+    test: {
             id: CommandID.testCommand,
            description: "test command /shrug",
+           permissionLevel: AccessLevel.FullAccess,
+           isCheat: false
+       },
+    broadcast: {
+            id: CommandID.broadcastMessage,
+            usage: "[message]",
+           description: "Broadcasts message to all clients",
            permissionLevel: AccessLevel.FullAccess,
            isCheat: false
        }
@@ -225,6 +238,17 @@ export const commandCallbacks = {
       test: (client: Client, xArg: string, yArg: string) => {
             return `fuckkk im cumming`;
     },
+    broadcast: (client: Client, messageArg: string) => {
+             const player = client.camera?.cameraData.player;
+        if (!Entity.exists(player) || !(player instanceof TankBody)) return;
+        if (client.accessLevel !== AccessLevel.FullAccess) return;
+        player.game.broadcast()
+            .u8(ClientBound.Notification)
+            .stringNT(messageArg)
+            .u32(0x000000)
+            .float(10000)
+            .stringNT("").send();
+    },
     claim: (client: Client, entityArg: string) => {
         const TEntity = new Map([
           ["ArenaCloser", ArenaCloser],
@@ -245,6 +269,7 @@ export const commandCallbacks = {
           ["FallenSpike", FallenSpike],
           ["Mothership", Mothership],
           ["Dominator", Dominator],
+          ["FallenTrapper", FallenTrapper]
         ] as [string, typeof ObjectEntity][]).get(entityArg)
 
         if (!TEntity || !client.camera?.game.entities.AIs.length) return;
@@ -310,7 +335,14 @@ export const commandCallbacks = {
             ["ColossalHexagon", ColossalHexagon],
             ["Square", Square],
             ["Triangle", Triangle],
-            ["FatGuardian", FatGuardian]
+            ["FatGuardian", FatGuardian],
+            ["AdminSquare", AdminSquare],
+            ["Dodecagon", Dodecagon],
+            ["Circle", Circle],
+            ["FallenTrapper", FallenTrapper],
+            ["SmallDefender", SmallDefender],
+            ["AdminCircle", AdminCircle],
+            ["MazeWall", MazeWall]
         ] as [string, typeof ObjectEntity][]).get(entityArg);
 
         if (isNaN(count) || count < 0 || !game || !TEntity) return;

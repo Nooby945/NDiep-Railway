@@ -29,7 +29,7 @@ export default class Heptagon extends AbstractShape {
     protected static BASE_ORBIT = AbstractShape.BASE_ORBIT / 2;
     protected static BASE_VELOCITY = AbstractShape.BASE_VELOCITY / 2;
 
-    public constructor(game: GameServer, isAlpha=false, shiny=(Math.random() < 0.1) && !isAlpha) {
+    public constructor(game: GameServer, isAlpha=false, shiny=(Math.random() < 0.1) && !isAlpha, jungle=Math.random() < 0.005) {
         super(game);
         
         this.nameData.values.name = isAlpha ? "Gamma Heptagon" : "Heptagon";
@@ -53,5 +53,11 @@ export default class Heptagon extends AbstractShape {
             this.scoreReward *= 100;
             this.healthData.values.health = this.healthData.values.maxHealth *= 10;
         }
+	if (jungle) {
+		this.physicsData.values.size *= 2.6;
+        	this.healthData.values.health = (this.healthData.values.maxHealth *= 4.3);
+        	this.physicsData.values.absorbtionFactor /= 6;
+        	this.scoreReward *= 50
+	}
     }
 }

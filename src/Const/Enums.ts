@@ -48,6 +48,7 @@ Border = 0,
     EnemyHeptagon = 23,
     EnemyOctagon = 24,
     White = 25,
+    AdminShape = 26
 }
 
 /**
@@ -79,7 +80,8 @@ export const ColorsHexCode: Record<Color, number> = {
     [Color.kMaxColors]: 0x000000,
     [Color.EnemyHeptagon]: 0x38B764,
     [Color.EnemyOctagon]: 0x4A66BD,
-    [Color.White]: 0xFFFFFF
+    [Color.White]: 0xFFFFFF,
+    [Color.AdminShape]: 0x301934
 }
 
 /**

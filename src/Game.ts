@@ -40,8 +40,10 @@ import SpikeboxArena from "./Gamemodes/Misc/Spikebox";
 import DominationTestingArena from "./Gamemodes/Misc/DomTest";
 import JungleArena from "./Gamemodes/Misc/Jungle";
 import FactoryTestArena from "./Gamemodes/Misc/FactoryTest";
+import HellArena from "./Gamemodes/Misc/Hell";
 import BallArena from "./Gamemodes/Misc/Ball";
 import MazeArena from "./Gamemodes/Maze";
+import SiegeArena from "./Gamemodes/Siege";
 
 /**
  * WriterStream that broadcasts to all of the game's WebSockets.
@@ -63,7 +65,7 @@ class WSSWriterStream extends Writer {
     }
 }
 
-type DiepGamemodeID = "ffa" | "sandbox" | "teams" | "4teams" | "mot" | "dom" | "maze" | "tag" | "survival" | "testing" | "spike" | "domtest" | "jungle" | "factest" | "ball";
+type DiepGamemodeID = "ffa" | "sandbox" | "teams" | "4teams" | "mot" | "dom" | "maze" | "tag" | "survival" | "testing" | "spike" | "domtest" | "jungle" | "factest" | "ball" | "hell" | "siege";
 
 const GamemodeToArenaClass: Record<DiepGamemodeID, (typeof ArenaEntity) | null> & { "*": typeof ArenaEntity }= {
     "ffa": FFAArena,
@@ -81,7 +83,9 @@ const GamemodeToArenaClass: Record<DiepGamemodeID, (typeof ArenaEntity) | null> 
     "domtest": DominationTestingArena,
     "jungle": JungleArena,
     "factest": FactoryTestArena,
-    "ball": BallArena
+    "ball": BallArena,
+    "hell": HellArena,
+    "siege": SiegeArena
 }
 
 /**
@@ -190,7 +194,7 @@ export default class GameServer {
                 return;
             }
 
-            util.log("Incoming");
+            util.log("Incoming client to gamemode " + this.gamemode);
             if (this.arena.state !== ArenaState.OPEN) {
                 util.log("Arena Closed, try reloading the game.");
                 return  ws.terminate();

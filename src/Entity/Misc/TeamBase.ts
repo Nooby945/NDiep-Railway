@@ -21,12 +21,13 @@ import GameServer from "../../Game";
 import { HealthFlags, PhysicsFlags, StyleFlags } from "../../Const/Enums";
 import { TeamGroupEntity } from "./TeamEntity";
 import LivingEntity from "../Live";
+
 /**
  * Represents Team Bases in game.
  */
 export default class TeamBase extends LivingEntity {
 
-    public constructor(game: GameServer, team: TeamGroupEntity, x: number, y: number, width: number, height: number, painful: boolean=true) {
+    public constructor(game: GameServer, team: TeamGroupEntity, x: number, y: number, width: number, height: number, painful: boolean=true, lethal: boolean=false) {
         super(game);
 
         this.relationsData.values.team = team;
@@ -44,6 +45,10 @@ export default class TeamBase extends LivingEntity {
         if (!painful) {
             this.physicsData.values.pushFactor = 0;
             this.damagePerTick = 0;
+        }
+
+        if (lethal) {
+            this.damagePerTick = 999;
         }
 
         this.damageReduction = 0;

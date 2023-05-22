@@ -24,7 +24,7 @@ import { Color } from "../../Const/Enums";
 /**
  * Pentagon entity class.
  */
-export default class Pentagon extends AbstractShape {
+export default class ColossalHexagon extends AbstractShape {
     /** If the pentagon is an alpha pentagon or not */
     public isColossal: boolean;
 
@@ -49,7 +49,7 @@ export default class Pentagon extends AbstractShape {
         this.isShiny = shiny;
 
         this.damagePerTick = isColossal ? 60 : 60;
-        this.scoreReward = isColossal ? 1024000 : 1024000;
+        this.scoreReward = isColossal ? 1024000 / 20: 1024000 / 20;
         
         if (shiny) {
             this.scoreReward *= 9;

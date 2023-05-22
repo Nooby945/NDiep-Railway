@@ -4,7 +4,7 @@ import AbstractShape from "./AbstractShape";
 import { Color } from "../../Const/Enums";
 
 export default class ShinySquare extends AbstractShape {
-    public constructor(game: GameServer, shiny=Math.random() < 0.5) {
+    public constructor(game: GameServer, shiny=Math.random() < 0.1) {
         super(game);
         this.nameData.values.name = "ShinySquare";
         this.healthData.values.health = this.healthData.values.maxHealth = 10;

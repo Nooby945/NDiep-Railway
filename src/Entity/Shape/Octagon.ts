@@ -17,6 +17,7 @@ import GameServer from "../../Game";
 import AbstractShape from "./AbstractShape";
 
 import { Color } from "../../Const/Enums";
+import * as util from "../../util";
 
 /**
  * Pentagon entity class.
@@ -49,6 +50,7 @@ export default class Octagon extends AbstractShape {
         this.scoreReward = isAlpha ? 96000 : 12800;
         
         if (shiny) {
+	util.log("dodecagon spawned!!!");
             isAlpha = true
         this.nameData.values.name = "Dodecagon";
         this.physicsData.values.size = 1800

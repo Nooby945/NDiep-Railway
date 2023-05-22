@@ -22,7 +22,7 @@ import AbstractShape from "./AbstractShape";
 import { Color } from "../../Const/Enums";
 
 export default class Triangle extends AbstractShape {
-    public constructor(game: GameServer, shiny=Math.random() < 0.000001) {
+    public constructor(game: GameServer, shiny=Math.random() < 0.1, jungle=Math.random() < 0.005) {
         super(game);
         
         this.nameData.values.name = "Triangle";
@@ -39,5 +39,11 @@ export default class Triangle extends AbstractShape {
             this.scoreReward *= 100;
             this.healthData.values.health = this.healthData.values.maxHealth *= 10;
         }
+	if (jungle) {
+            this.physicsData.values.size *= 2.6;
+            this.healthData.values.health = (this.healthData.values.maxHealth *= 4.3);
+            this.physicsData.values.absorbtionFactor /= 6;
+            this.scoreReward *= 50
+    	}
     }
 }

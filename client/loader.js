@@ -109,6 +109,7 @@ Module.run = async () => {
         const [func, isAsync] = Module.todo.shift();
         if(isAsync) args = await Promise.all(func(...args));
         else args = func(...args);
+        console.warn('what kind of goofy goober stuff are you doing in the console??')
         console.log(`Running stage ${Module.status} done`);
     }
 };

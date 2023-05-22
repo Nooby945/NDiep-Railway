@@ -23,6 +23,7 @@ import Crasher from "./Crasher";
 import Pentagon from "./Pentagon";
 import Triangle from "./Triangle";
 import Square from "./Square";
+//import Circle from "./Circle";
 import Heptagon from "./Heptagon";
 import Octagon from "./Octagon";
 import WepTriangle from "./WepTriangle";
@@ -31,6 +32,7 @@ import ColossalHexagon from "./ColossalHexagon";
 import Hexagon from "./Hexagon";
 import AbstractShape from "./AbstractShape";
 import { removeFast } from "../../util";
+import * as util from "../../util";
 
 /**
  * Used to balance out shape count in the arena, as well
@@ -56,6 +58,8 @@ export default class ShapeManager {
      */
     protected spawnShape(): AbstractShape {
         let shape: AbstractShape;
+        let shape2: AbstractShape;
+        let shape3: AbstractShape;
         const {x, y} = this.arena.findSpawnLocation();
         const rightX = this.arena.arenaData.values.rightX;
         const leftX = this.arena.arenaData.values.leftX;
@@ -66,6 +70,25 @@ export default class ShapeManager {
             shape.positionData.values.x = x;
             shape.positionData.values.y = y;
             shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+                // octagons
+            if (Math.random() <= .0004) {
+                    // colossal hexas
+                    shape2 = new ColossalHexagon(this.game);
+
+                    shape2.positionData.values.x = x;
+                    shape2.positionData.values.y = y;
+                    shape2.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+                    util.log("colossal hexa spawned!!!!!!!!!!!!!!!!!!!!!!!!");
+                }
+	            if (Math.random() <= 0.07) {
+            	   shape2 = new Octagon(this.game, Math.random() <= 0.02);
+
+            	   shape2.positionData.values.x = x;
+            	   shape2.positionData.values.y = y;
+            	   shape2.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+		          util.log("octa spawned");
+	            } 
+                
         } else if (Math.max(x, y) < rightX / 5 && Math.min(x, y) > leftX / 5) {
             // Crasher Zone
             const isBig = Math.random() < .2;
@@ -78,7 +101,26 @@ export default class ShapeManager {
         } else {
             // Fields of Shapes
             const rand = Math.random();
-            if (rand < .04) {
+	    if (rand < .0006) {
+                shape = new Octagon(this.game);
+
+                shape.positionData.values.x = x;
+                shape.positionData.values.y = y;
+                shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+                util.log("octa spawned outside of nest!!!!!!");
+            } else if (rand <= .008) {
+		shape = new Heptagon(this.game);
+
+                shape.positionData.values.x = x;
+                shape.positionData.values.y = y;
+                shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+	    } else if (rand < .02) {
+		shape = new Hexagon(this.game);
+
+                shape.positionData.values.x = x;
+                shape.positionData.values.y = y;
+                shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+	    } else if (rand < .07) {
                 shape = new Pentagon(this.game);
 
                 shape.positionData.values.x = x;
@@ -90,13 +132,19 @@ export default class ShapeManager {
                 shape.positionData.values.x = x;
                 shape.positionData.values.y = y;
                 shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
-            } else { // if rand < 80%
-                shape = new Square(this.game);
+	    } else {
+		shape = new Square(this.game);
 
                 shape.positionData.values.x = x;
                 shape.positionData.values.y = y;
                 shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
-            }
+
+                /*shape2 = new Circle(this.game);
+
+                shape2.positionData.values.x = x * Math.floor(Math.random() * 3) + 1;
+                shape2.positionData.values.y = y * Math.floor(Math.random() * 3) + 1;
+                shape2.relationsData.values.owner = shape2.relationsData.values.team = this.arena;*/
+	    }
         }
 
         shape.scoreReward *= this.arena.shapeScoreRewardMultiplier;
@@ -118,8 +166,10 @@ export default class ShapeManager {
     public tick() {
         for (let i = this.wantedShapes; i --> 0;) {
             const shape = this.shapes[i];
+	    const shape2 = this.shapes[i];
             // Alternatively, Entity.exists(shape), though this is probably faster
             if (!shape || shape.hash === 0) this.shapes[i] = this.spawnShape();
+            if (!shape2 || shape2.hash === 0) this.shapes[i] = this.spawnShape();
         }
     }
 }

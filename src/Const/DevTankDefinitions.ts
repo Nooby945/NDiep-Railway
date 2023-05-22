@@ -28,22 +28,23 @@ import { TankDefinition } from "./TankDefinitions";
  */
 export const enum DevTank {
     Developer = -1,
-    UsainBolt = -2,
-    BigBoi = -3,
-    Bouncy = -4,
-    Master = -5,
-    Musketeer = -6,
-    Squirrel = -7,
-    Shotgun = -8,
-    Flamethrower = -9,
-    Builder = -10,
-    Goodbye = -11,
-    Spectator = -12,
-    TheCroc = -13,
-    Railgun = -14,
-    Nightmare = -15,
-    Claimer = -16,
-    Exploder = -17
+    DeveloperNoSpikeHull = -2,
+    UsainBolt = -3,
+    BigBoi = -4,
+    Bouncy = -5,
+    Master = -6,
+    Musketeer = -7,
+    Squirrel = -8,
+    Shotgun = -9,
+    Flamethrower = -10,
+    Builder = -11,
+    Goodbye = -12,
+    Spectator = -13,
+    TheCroc = -15,
+    Railgun = -16,
+    Nightmare = -17,
+    Claimer = -18,
+    Exploder = -19
 };
 
 // why no work
@@ -95,6 +96,88 @@ const DevTankDefinitions: TankDefinition[] = [
         visibilityRateMoving: 0,
         invisibilityRate: 0,
         preAddon: "spike",
+        postAddon: null,
+        maxHealth: 50,
+        borderWidth: 15,
+        sides: 1,
+        stats: [
+            {
+                name: "Movement Speed",
+                max: 9
+            },
+            {
+                name: "Reload",
+                max: 9
+            },
+            {
+                name: "Bullet Damage",
+                max: 9
+            },
+            {
+                name: "Bullet Penetration",
+                max: 9
+            },
+            {
+                name: "Bullet Speed",
+                max: 9
+            },
+            {
+                name: "Body Damage",
+                max: 9
+            },
+            {
+                name: "Max Health",
+                max: 9
+            },
+            {
+                name: "Health Regen",
+                max: 9
+            }
+        ]
+    },
+    {
+        id: DevTank.DeveloperNoSpikeHull,
+        name: "Developer",
+        upgradeMessage: "Use your right mouse button to cry",
+        // upgrades dont have any affect
+        upgrades: [],
+        barrels: [
+            {
+                angle: 0,
+                delay: 0,
+                size: 85,
+                offset: 0,
+                recoil: 2,
+                addon: null,
+                bullet: {
+                    type: "bullet",
+                    speed: .5,
+                    damage: .5,
+                    health: 0.45,
+                    scatterRate: 0.01,
+                    lifeLength: 0.3,
+                    absorbtionFactor: 1,
+                    sizeRatio: 1
+                },
+                reload: .6,
+                width: 50,
+                isTrapezoid: true,
+                trapezoidDirection: Math.PI
+            }
+        ],
+        levelRequirement: 45,
+        fieldFactor: .75,
+        speed: 1.5,
+        absorbtionFactor: 1,
+        flags: {
+            invisibility: false,
+            zoomAbility: false,
+            devOnly: false
+        },
+        visibilityRateShooting: 0.23,
+        visibilityRateMoving: 0,
+        invisibilityRate: 0,
+        preAddon: null,
         postAddon: null,
         maxHealth: 50,
         borderWidth: 15,

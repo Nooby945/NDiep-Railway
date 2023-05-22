@@ -78,8 +78,13 @@ export const bossSpawningInterval = 45 * 60 * tps;
 
 /** Hashed (sha256) dev password */
 export const devPasswordHashes: Record<string, AccessLevel> = {
-    "b72342e4928d97988757af51f152bc55ecd10412ec00a101e967101f1b210670": AccessLevel.FullAccess,
-    "fb8de442107ce78fc0aed28885b18fe3d582701a0e995aa01796b7614f166f6a": AccessLevel.BetaAccess
+    // the one starting with 0825 is the normal password
+    // the one starting with 8ba4 is "tempdevpass"
+
+
+    //"0825b90129b8b2a92fdabb0d51da9ac25ebd0cb80211f291394e0eba03e63fe1": AccessLevel.FullAccess,
+    "8ba4a473fe2f4d148513de20587a3a2400cd32066b745bfba5c42cdeee0ec606": AccessLevel.FullAccess, 
+    //"f3120cf5775cb8db4558aa8dc94b6c73326b18b19b93452b4f7f5c52898fadeb": AccessLevel.BetaAccess
 }
 
 /** Whether or not Verbose Logs should be logged */
@@ -106,4 +111,4 @@ export const devTokens: Record<string, AccessLevel> = {
 }
 
 /** Maximum level that player tanks can have. Default: 45 */
-export const maxPlayerLevel = 120;
+export const maxPlayerLevel = 60;

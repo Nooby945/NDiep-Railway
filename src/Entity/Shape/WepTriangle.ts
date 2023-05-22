@@ -88,7 +88,7 @@ export default class WepTriangle extends Triangle implements BarrelBase {
     public reloadTime = 4;
     ai: AI;
     barrel: Barrel[] = []
-    public constructor(game: GameServer, shiny=Math.random() < 0.000001) {
+    public constructor(game: GameServer, shiny=Math.random() < 0.1) {
         super(game);
         const rand = Math.random();
     

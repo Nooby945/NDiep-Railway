@@ -21,8 +21,26 @@ const CDN = "https://static.diep.io/";
 const API_URL = `${window.location.href}api/`;
 
 const CHANGELOG = [
-    "Press Escape twice for themes.",
-    "Hexagons added."
+    "Another new tank, the Annihiliner which does not upgrade from anything",
+    "Added Auto Quad Tank, an upgrade of Quad Tank",
+    "Removed circles because theyre basically useless and lag out the game",
+    "Added a new shape ;)",
+    "Jungle shapes now rarely spawn in other gamemodes",
+    "Octagons now can spawn in other places",
+    "Shapes like hexagon and heptagon now spawn less frequently",
+    "Octagons now spawn less frequently instead of alongside pentagons",
+    "Octagons now spawn at the pentagon nest",
+    "More shapes now spawn naturally, including hexagons",
+    "Developer tank no longer has spike hull",
+    "New dev tank branch: Dreadnought",
+    "Hexagons added",
+    "",
+    "Press ESC twice for themes.",
+    "This server is only temporary, and will change when we finish migrating to Railway.",
+    "Do note that this still has limited resources, so don't send a lot of requests to the server!",
+    "This server can go down at any moment without any prior warning, so don't expect to play for the whole day!",
+    "NDiep discord server: https://discord.gg/uC88EqvB5D",
+    "Diepcustom discord server (join it, its really cool): https://discord.gg/cNE2zBamuE"
 ];
 
 const ASM_CONSTS = {

@@ -84,7 +84,7 @@ export default class WepSquare extends Square implements BarrelBase {
     public reloadTime = 4;
     barrel: Barrel[] = []
     ai: AI;
-    public constructor(game: GameServer, shiny=Math.random() < 0.000001) {
+    public constructor(game: GameServer, shiny=Math.random() < 0.1) {
         super(game);
         const rand = Math.random();
         this.sizeFactor = this.physicsData.values.size / 50;
